@@ -1,0 +1,14 @@
+drive_intermediate_position:
+  target:
+    entity:
+      integration: selve_gateway
+      domain: cover
+  fields:
+    position:
+      required: true
+      default: 1
+      selector:
+        select:
+          options:
+            - "1"
+            - "2"

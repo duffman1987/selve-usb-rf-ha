@@ -1,0 +1,7 @@
+configuration:
+  device:
+    name: USB-Stick
+    description: Serieller Port des SELVE USB-RF Sticks. Leer lassen für automatische Suche.
+  install_integration:
+    name: Integration installieren
+    description: Nur ohne HACS einschalten – kopiert beim Start die Integration „SELVE USB-RF Gateway“ nach /config/custom_components.

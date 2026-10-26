@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SELVE Gateway</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 4h18v2H3zm0 4h18v2H3zm0 4h18v2H3zm0 4h18v2H3z" opacity=".35"/><path fill="currentColor" d="M2 2h20v3H2z"/></svg>
+    <span>SELVE USB-RF Gateway</span>
+  </div>
+  <div class="conn">
+    <span id="duty" class="pill" title="Funkauslastung (Duty Cycle)">Funk –</span>
+    <span id="connState" class="pill off">Getrennt</span>
+    <select id="portSelect" aria-label="Serieller Port"></select>
+    <button id="connectBtn" class="btn small">Verbinden</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="tabs" id="tabs">
+    <button data-tab="devices" class="active">Aktore <span class="count" id="cnt-devices"></span></button>
+    <button data-tab="groups">Gruppen <span class="count" id="cnt-groups"></span></button>
+    <button data-tab="iveo">iveo-Kanäle <span class="count" id="cnt-iveo"></span></button>
+    <button data-tab="sensors">Sensoren <span class="count" id="cnt-sensors"></span></button>
+    <button data-tab="senders">Handsender <span class="count" id="cnt-senders"></span></button>
+    <button data-tab="sensim">Sensorsimulation <span class="count" id="cnt-sensim"></span></button>
+    <button data-tab="gateway">Gateway</button>
+    <button data-tab="log">Protokoll</button>
+  </nav>
+
+  <main>
+    <!-- Aktore -->
+    <section id="tab-devices" class="tab active">
+      <div class="toolbar">
+        <h2>commeo-Aktore</h2>
+        <div class="spacer"></div>
+        <button class="btn" id="devRefresh">Aktualisieren</button>
+        <button class="btn primary" id="devScan">Neue Aktore suchen</button>
+      </div>
+      <div class="bulk" id="devBulk" hidden>
+        <span id="devBulkInfo"></span>
+        <button class="btn small" data-bulk="1">▲ Auf</button>
+        <button class="btn small" data-bulk="0">■ Stopp</button>
+        <button class="btn small" data-bulk="2">▼ Ab</button>
+        <button class="btn small" data-bulk="3">Pos 1</button>
+        <button class="btn small" data-bulk="5">Pos 2</button>
+        <button class="btn small ghost" id="devBulkClear">Auswahl aufheben</button>
+      </div>
+      <div class="grid" id="devList"></div>
+    </section>
+
+    <!-- Gruppen -->
+    <section id="tab-groups" class="tab">
+      <div class="toolbar">
+        <h2>Gruppen</h2>
+        <div class="spacer"></div>
+        <button class="btn" id="grpRefresh">Aktualisieren</button>
+        <button class="btn primary" id="grpNew">Neue Gruppe</button>
+      </div>
+      <div class="grid" id="grpList"></div>
+    </section>
+
+    <!-- iveo -->
+    <section id="tab-iveo" class="tab">
+      <div class="toolbar">
+        <h2>iveo-Funkkanäle</h2>
+        <div class="spacer"></div>
+        <label class="inline">Repeater
+          <select id="iveoRepeater">
+            <option value="0">Kein Repeater</option>
+            <option value="1">1 Repeater</option>
+            <option value="2">Mehrere Repeater</option>
+          </select>
+        </label>
+        <button class="btn" id="iveoRefresh">Aktualisieren</button>
+        <button class="btn primary" id="iveoNew">Neuer Kanal</button>
+      </div>
+      <p class="hint">iveo ist nur einseitig: Das Gateway sendet Befehle, bekommt aber keine Position zurück.</p>
+      <div class="grid" id="iveoList"></div>
+    </section>
+
+    <!-- Sensoren -->
+    <section id="tab-sensors" class="tab">
+      <div class="toolbar">
+        <h2>commeo-Sensoren</h2>
+        <div class="spacer"></div>
+        <button class="btn" id="senRefresh">Aktualisieren</button>
+        <button class="btn primary" id="senTeach">Sensor einlernen</button>
+      </div>
+      <div class="grid" id="senList"></div>
+    </section>
+
+    <!-- Sender -->
+    <section id="tab-senders" class="tab">
+      <div class="toolbar">
+        <h2>commeo-Handsender</h2>
+        <div class="spacer"></div>
+        <button class="btn" id="sndRefresh">Aktualisieren</button>
+        <button class="btn primary" id="sndTeach">Sender einlernen</button>
+      </div>
+      <p class="hint">Eingelernte Handsender melden ihre Tastendrücke an das Gateway – z.B. um andere Systeme zu steuern.</p>
+      <div class="grid" id="sndList"></div>
+    </section>
+
+    <!-- Sensorsimulation -->
+    <section id="tab-sensim" class="tab">
+      <div class="toolbar">
+        <h2>Sensorsimulation</h2>
+        <div class="spacer"></div>
+        <button class="btn" id="simRefresh">Aktualisieren</button>
+      </div>
+      <p class="hint">Bis zu 8 simulierte Sensoren, mit denen Werte aus anderen Systemen an commeo-Aktore gegeben werden. Nach jedem Neustart des Gateways müssen die Werte neu gesetzt werden.</p>
+      <div class="grid" id="simList"></div>
+    </section>
+
+    <!-- Gateway -->
+    <section id="tab-gateway" class="tab">
+      <div class="toolbar">
+        <h2>Gateway</h2>
+        <div class="spacer"></div>
+        <button class="btn" id="gwRefresh">Aktualisieren</button>
+        <button class="btn" id="gwBackup">Sicherung exportieren</button>
+      </div>
+      <div class="panels">
+        <div class="panel">
+          <h3>Information</h3>
+          <dl class="kv" id="gwInfo"></dl>
+        </div>
+        <div class="panel">
+          <h3>Einstellungen</h3>
+          <div class="switches" id="gwSettings"></div>
+        </div>
+        <div class="panel">
+          <h3>Funk</h3>
+          <dl class="kv" id="gwRF"></dl>
+        </div>
+        <div class="panel danger-zone">
+          <h3>Wartung</h3>
+          <p class="hint">Neustart unterbricht kurz die Verbindung. Der Werkszustand löscht alle eingelernten Aktore, Sender, Sensoren, Gruppen und Kanäle im Gateway.</p>
+          <div class="row">
+            <button class="btn" id="gwReset">Gateway neu starten</button>
+            <button class="btn danger" id="gwFactory">Werkszustand …</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Protokoll -->
+    <section id="tab-log" class="tab">
+      <div class="toolbar">
+        <h2>Protokoll</h2>
+        <div class="spacer"></div>
+        <label class="inline"><input type="checkbox" id="logRaw"> Roh-XML anzeigen</label>
+        <button class="btn" id="logClear">Leeren</button>
+      </div>
+      <form class="console" id="consoleForm">
+        <input id="consoleMethod" placeholder="Methode, z.B. selve.GW.device.getValues" list="methodList" autocomplete="off">
+        <input id="consoleParams" placeholder='Parameter als JSON, z.B. [0]  ·  Maske: {"mask":[0,3],"len":8}' autocomplete="off">
+        <button class="btn primary">Senden</button>
+      </form>
+      <datalist id="methodList"></datalist>
+      <div class="log" id="logList"></div>
+    </section>
+  </main>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" class="dlg-inner">
+    <header><h3 id="dlgTitle"></h3><button class="x" value="close" aria-label="Schließen">×</button></header>
+    <div id="dlgBody"></div>
+    <footer id="dlgFoot"></footer>
+  </form>
+</dialog>
+
+<div id="toasts"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "SELVE USB-RF Gateway",
+        "description": "Verbindung zur App „SELVE USB-RF Gateway“. Die Vorgaben passen für die lokal installierte App.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Die SELVE App ist nicht erreichbar. Ist die App gestartet?",
+      "no_stick": "Die SELVE App läuft, ist aber nicht mit dem USB-Stick verbunden. Bitte das Protokoll der App prüfen."
+    },
+    "abort": {
+      "already_configured": "Dieses Gateway ist bereits eingerichtet."
+    }
+  },
+  "services": {
+    "drive_intermediate_position": {
+      "name": "Zwischenposition anfahren",
+      "description": "Fährt in die im Aktor gespeicherte Zwischenposition 1 (Beschattung) oder 2 (Lüftung).",
+      "fields": {
+        "position": {
+          "name": "Position",
+          "description": "1 = Beschattungsposition, 2 = Lüftungsposition."
+        }
+      }
+    }
+  }
+}

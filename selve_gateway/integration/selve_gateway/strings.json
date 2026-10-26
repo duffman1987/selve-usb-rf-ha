@@ -1,0 +1,33 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "SELVE USB-RF Gateway",
+        "description": "Connect to the SELVE USB-RF Gateway app. The defaults fit the locally installed app.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the SELVE app. Is the app started?",
+      "no_stick": "The SELVE app is running but not connected to the USB stick. Check the app log."
+    },
+    "abort": {
+      "already_configured": "This gateway is already configured."
+    }
+  },
+  "services": {
+    "drive_intermediate_position": {
+      "name": "Drive to intermediate position",
+      "description": "Moves the cover to intermediate position 1 (shading) or 2 (ventilation) stored in the actuator.",
+      "fields": {
+        "position": {
+          "name": "Position",
+          "description": "1 = shading position, 2 = ventilation position."
+        }
+      }
+    }
+  }
+}

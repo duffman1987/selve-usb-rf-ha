@@ -1,0 +1,11 @@
+{
+  "domain": "selve_gateway",
+  "name": "SELVE USB-RF Gateway",
+  "codeowners": ["@duffman1987"],
+  "config_flow": true,
+  "documentation": "https://github.com/duffman1987/selve-usb-rf-ha",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/duffman1987/selve-usb-rf-ha/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

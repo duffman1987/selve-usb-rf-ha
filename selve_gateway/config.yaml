@@ -1,0 +1,24 @@
+name: SELVE USB-RF Gateway
+version: "1.0.0"
+slug: selve_gateway
+description: Verwaltung und Steuerung von SELVE commeo- und iveo-Rollläden über den SELVE USB-RF Stick
+url: https://github.com/duffman1987/selve-usb-rf-ha
+arch:
+  - aarch64
+  - amd64
+init: false
+startup: services
+boot: auto
+ingress: true
+ingress_port: 8765
+panel_icon: mdi:blinds-horizontal
+panel_title: SELVE
+uart: true
+map:
+  - homeassistant_config:rw
+options:
+  device: ""
+  install_integration: false
+schema:
+  device: device(subsystem=tty)?
+  install_integration: bool

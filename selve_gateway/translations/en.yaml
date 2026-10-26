@@ -1,0 +1,7 @@
+configuration:
+  device:
+    name: USB stick
+    description: Serial port of the SELVE USB-RF stick. Leave empty for auto-detection.
+  install_integration:
+    name: Install integration
+    description: Only enable without HACS – copies the "SELVE USB-RF Gateway" integration to /config/custom_components on start.
