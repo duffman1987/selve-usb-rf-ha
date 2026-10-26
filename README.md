@@ -8,7 +8,7 @@ Das Repository enthält zwei Teile, die zusammenarbeiten:
 | Teil | Aufgabe | Installation |
 |---|---|---|
 | **App** `selve_gateway` | Spricht mit dem USB-Stick, Verwaltungsoberfläche in der Seitenleiste (Aktore suchen/einlernen, Gruppen, iveo-Kanäle, Sensoren, Handsender, Endlagen, Protokoll …) | App-Store von Home Assistant |
-| **Integration** `selve_gateway` | Rollläden, Gruppen und iveo-Kanäle als Geräte (`cover`) – live, für Dashboards, Sprachassistenten und Automationen | HACS |
+| **Integration** `selve_gateway` | Rollläden, Gruppen und iveo-Kanäle als Geräte (`cover`) – live, für Dashboards, Sprachassistenten und Automationen | HACS (oder ohne HACS, siehe unten) |
 
 Voraussetzung: **Home Assistant OS** (für die App), der Stick steckt am Home-Assistant-Rechner.
 
@@ -33,12 +33,36 @@ Oder von Hand: *HACS → ⋮ → Benutzerdefinierte Repositories* →
 `https://github.com/duffman1987/selve-usb-rf-ha`, Typ **Integration** → Hinzufügen.
 Dann „SELVE USB-RF Gateway“ in HACS suchen → **Herunterladen** → **Home Assistant neu starten**.
 
+#### … oder ohne HACS
+
+Nur **einen** der Wege nutzen, sonst überschreiben sie sich gegenseitig.
+
+- **Über die App (empfohlen):** In der App unter *Konfiguration* die Option
+  **„Integration installieren“** einschalten und die App neu starten. Die App kopiert die
+  Integration nach `/config/custom_components/selve_gateway` und aktualisiert sie bei
+  jedem App-Update mit. Danach **Home Assistant neu starten**.
+- **Von Hand:** Den Ordner `custom_components/selve_gateway` aus diesem Repository nach
+  `/config/custom_components/` kopieren (z.B. über Samba oder „Studio Code Server“) und
+  Home Assistant neu starten. Mit der App „Terminal & SSH“:
+
+  ```bash
+  cd /config && wget -qO- https://github.com/duffman1987/selve-usb-rf-ha/archive/refs/tags/v1.0.1.tar.gz | tar xz && mkdir -p custom_components && rm -rf custom_components/selve_gateway && cp -r selve-usb-rf-ha-1.0.1/custom_components/selve_gateway custom_components/ && rm -r selve-usb-rf-ha-1.0.1
+  ```
+
+  Updates müssen bei diesem Weg von Hand wiederholt werden.
+
 ### 3. Integration einrichten
+
+Läuft die App, meldet sie sich selbst bei Home Assistant: Unter *Einstellungen → Geräte & Dienste*
+erscheint „**SELVE USB-RF Gateway – Entdeckt**“ → **Hinzufügen** → **Absenden**.
+
+Falls nicht, von Hand:
 
 [![Integration hinzufügen](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=selve_gateway)
 
 *Einstellungen → Geräte & Dienste → Integration hinzufügen* → „SELVE USB-RF Gateway“ →
-Host `local-selve-gateway` und Port `8765` übernehmen.
+Host `d034fa46-selve-gateway` und Port `8765` übernehmen. Der Hostname steht auch auf der
+Info-Seite der App.
 
 ## Nutzung
 

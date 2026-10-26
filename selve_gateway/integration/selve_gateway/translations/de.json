@@ -3,11 +3,15 @@
     "step": {
       "user": {
         "title": "SELVE USB-RF Gateway",
-        "description": "Verbindung zur App „SELVE USB-RF Gateway“. Die Vorgaben passen für die lokal installierte App.",
+        "description": "Verbindung zur App „SELVE USB-RF Gateway“. Die Vorgaben passen für die App aus dem Repository duffman1987/selve-usb-rf-ha.",
         "data": {
           "host": "Host",
           "port": "Port"
         }
+      },
+      "hassio_confirm": {
+        "title": "SELVE USB-RF Gateway",
+        "description": "Die App „SELVE USB-RF Gateway“ wurde gefunden. Jetzt einrichten?"
       }
     },
     "error": {
@@ -15,7 +19,8 @@
       "no_stick": "Die SELVE App läuft, ist aber nicht mit dem USB-Stick verbunden. Bitte das Protokoll der App prüfen."
     },
     "abort": {
-      "already_configured": "Dieses Gateway ist bereits eingerichtet."
+      "already_configured": "Dieses Gateway ist bereits eingerichtet.",
+      "already_in_progress": "Die Einrichtung läuft bereits."
     }
   },
   "services": {

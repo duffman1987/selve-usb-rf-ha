@@ -2,8 +2,10 @@
 
 DOMAIN = "selve_gateway"
 
-# Hostname der lokal installierten Home Assistant App "selve_gateway"
-DEFAULT_HOST = "local-selve-gateway"
+# Hostname der App "selve_gateway": aus dem GitHub-Repository installiert
+# (Kennung = sha1 der Repository-URL) bzw. lokal unter /addons abgelegt
+DEFAULT_HOST = "d034fa46-selve-gateway"
+KNOWN_HOSTS = (DEFAULT_HOST, "local-selve-gateway")
 DEFAULT_PORT = 8765
 
 SIGNAL_UPDATE = f"{DOMAIN}_update_{{}}"

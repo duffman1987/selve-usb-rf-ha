@@ -14,11 +14,13 @@ und steuert damit commeo- und iveo-Rollläden, Jalousien und Markisen.
 ## Einrichtung
 
 1. App starten. Im **Protokoll** sollte „Gateway gefunden an /dev/ttyUSB0“ stehen.
-2. Integration über **HACS** installieren (benutzerdefiniertes Repository
-   `https://github.com/duffman1987/selve-usb-rf-ha`, Typ *Integration*) und
-   Home Assistant neu starten.
-3. **Einstellungen → Geräte & Dienste → Integration hinzufügen → „SELVE USB-RF Gateway“**.
-   Host `local-selve-gateway` und Port `8765` übernehmen.
+2. Integration installieren – entweder über **HACS** (benutzerdefiniertes Repository
+   `https://github.com/duffman1987/selve-usb-rf-ha`, Typ *Integration*) **oder** ohne HACS
+   mit der Option **„Integration installieren“** (siehe unten). Danach Home Assistant neu starten.
+3. Die App meldet sich selbst: Unter **Einstellungen → Geräte & Dienste** erscheint
+   „SELVE USB-RF Gateway – Entdeckt“ → **Hinzufügen**. Falls nicht: *Integration hinzufügen →
+   „SELVE USB-RF Gateway“* mit dem Hostnamen von der Info-Seite dieser App
+   (z.B. `d034fa46-selve-gateway`) und Port `8765`.
 
 ## Optionen
 

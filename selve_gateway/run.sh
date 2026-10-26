@@ -24,5 +24,13 @@ if bashio::config.true 'install_integration'; then
     fi
 fi
 
+# Bei Home Assistant melden, damit die Integration die App automatisch findet
+HOST="$(hostname)"
+if bashio::discovery "selve_gateway" "$(bashio::var.json host "${HOST}" port "^8765")" > /dev/null; then
+    bashio::log.info "Bei Home Assistant als ${HOST}:8765 gemeldet."
+else
+    bashio::log.warning "Meldung bei Home Assistant fehlgeschlagen – Integration bitte von Hand mit Host ${HOST} einrichten."
+fi
+
 bashio::log.info "Starte SELVE Gateway (Port: ${DEVICE})"
 exec python3 /app/selve_gui.py --host 0.0.0.0 --port 8765 --no-browser --device "${DEVICE}"

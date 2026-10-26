@@ -1,5 +1,5 @@
 name: SELVE USB-RF Gateway
-version: "1.0.0"
+version: "1.0.1"
 slug: selve_gateway
 description: Verwaltung und Steuerung von SELVE commeo- und iveo-Rollläden über den SELVE USB-RF Stick
 url: https://github.com/duffman1987/selve-usb-rf-ha
@@ -14,6 +14,8 @@ ingress_port: 8765
 panel_icon: mdi:blinds-horizontal
 panel_title: SELVE
 uart: true
+discovery:
+  - selve_gateway
 map:
   - homeassistant_config:rw
 options:

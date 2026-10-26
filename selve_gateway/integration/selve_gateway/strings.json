@@ -3,11 +3,15 @@
     "step": {
       "user": {
         "title": "SELVE USB-RF Gateway",
-        "description": "Connect to the SELVE USB-RF Gateway app. The defaults fit the locally installed app.",
+        "description": "Connect to the SELVE USB-RF Gateway app. The defaults fit the app from the repository duffman1987/selve-usb-rf-ha.",
         "data": {
           "host": "Host",
           "port": "Port"
         }
+      },
+      "hassio_confirm": {
+        "title": "SELVE USB-RF Gateway",
+        "description": "The SELVE USB-RF Gateway app was found. Set it up now?"
       }
     },
     "error": {
@@ -15,7 +19,8 @@
       "no_stick": "The SELVE app is running but not connected to the USB stick. Check the app log."
     },
     "abort": {
-      "already_configured": "This gateway is already configured."
+      "already_configured": "This gateway is already configured.",
+      "already_in_progress": "Setup is already in progress."
     }
   },
   "services": {
